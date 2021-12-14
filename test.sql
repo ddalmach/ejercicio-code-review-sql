@@ -1,5 +1,6 @@
 -- See tables
-SELECT * FROM selim_application ORDER BY ID DESC;
+-- NO SE DEBE HACER UN SELECT *, SINO UN SELECT A TODOS LOS CAMPOS QUE SE NECESITE CONSULTAR
+SELECT * FROM selim_application ORDER BY ID DESC; 
 SELECT * FROM selim_application_log ORDER BY log_id DESC ;
 SELECT * FROM selim_application_conf;
 
