@@ -1,5 +1,6 @@
 CREATE OR REPLACE PACKAGE BODY application AS
 
+
 cs_RETRY_COUNT     CONSTANT VARCHAR2(30) := 'RETRY_COUNT';
 
 cs_STATUS_RETRY    CONSTANT VARCHAR2(1)  := 'R';
@@ -26,12 +27,14 @@ gt_Configuration T_CONFIGURATION;
     SELECT nvl(MAX(log_id) + 1, 1) INTO vn_logId FROM selim_application_log;
     
 		INSERT INTO selim_application_log(log_id, start_date, end_date, elapsed_time, operation_count, channel) 
-    VALUES (vn_logId, pid_StartDate, pid_EndDate, (to_number(pid_EndDate - pid_StartDate)*24*60*60), pin_OperationCount, pis_Channel);
+   
+   VALUES (vn_logId, pid_StartDate, pid_EndDate, (to_number(pid_EndDate - pid_StartDate)*24*60*60), pin_OperationCount, pis_Channel);
     
     COMMIT;
     
   EXCEPTION
     WHEN OTHERS THEN
+      -- No usar dbms output para errores se debe devolver el codigo de error y mensaje en dos variables de salida respectivamente.
       dbms_output.put_line(SQLERRM);
       NULL;
   END i_SelimApplicationLog;
