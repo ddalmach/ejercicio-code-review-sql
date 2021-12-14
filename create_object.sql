@@ -1,3 +1,4 @@
+-- Include exception handling in case CREATE TABLE command fails. Ex: in case the table already exists. 
 BEGIN
 	EXECUTE IMMEDIATE 'CREATE TABLE selim_application (ID                  NUMBER, 
                                                      number_a            NUMBER NOT NULL,
@@ -28,8 +29,8 @@ BEGIN
                                                          operation_count  NUMBER,
                                                          channel          VARCHAR2(100))';
 
-  -- Konfigürasyon insert örneði. Aþaðýdaki tabloya uygulama konfigürasyonlarý girilebilir. 
-	-- Retry_count bir uygulama konfigürasyonudur. Her iþlemin 10 kere tekrar edilmesini saðlar.
+  -- KonfigÃ¼rasyon insert Ã¶rneÃ°i. AÃ¾aÃ°Ã½daki tabloya uygulama konfigÃ¼rasyonlarÃ½ girilebilir. 
+	-- Retry_count bir uygulama konfigÃ¼rasyonudur. Her iÃ¾lemin 10 kere tekrar edilmesini saÃ°lar.
 	EXECUTE IMMEDIATE 'INSERT INTO selim_application_conf VALUES (''RETRY_COUNT'', 10, ''NUMBER'')';
   
 	COMMIT;
@@ -62,7 +63,7 @@ BEGIN
 	END;
 
 	-- create job 2
-	-- Bu job application'ýn çalýþma vakti öncesinde insert yapar. Application da bu insertleri kullanarak iþlemler yapar.
+	-- Bu job application'Ã½n Ã§alÃ½Ã¾ma vakti Ã¶ncesinde insert yapar. Application da bu insertleri kullanarak iÃ¾lemler yapar.
 	BEGIN
 		DBMS_SCHEDULER.CREATE_JOB(job_name        => 'selim_application_insert_job',
 															job_type        => 'PLSQL_BLOCK',
