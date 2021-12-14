@@ -1,4 +1,6 @@
 -- See tables
+-- No usar el select *.. usar los campos especificos que se usan
+
 SELECT * FROM selim_application ORDER BY ID DESC;
 SELECT * FROM selim_application_log ORDER BY log_id DESC ;
 SELECT * FROM selim_application_conf;
